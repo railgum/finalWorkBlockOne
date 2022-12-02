@@ -15,16 +15,25 @@ string[] EnterString()
   do
   {
     userString = Console.ReadLine();
-    // Проверка на пусту строку
+    // Проверка на пустую строку
     if (userString != "")
     {
-      count++; // если не пустая, добавляем в массив
+      // если не пустая, добавляем в массив
+
+      // выделяем память во временном массиве на 1 больше
+      count++;
       arrayTemp = new string[count];
+
+      // копируем массив во временный
       for (int i = 0; i < arrayTemp.Length - 1; i++)
       {
         arrayTemp[i] = array[i];
       }
+
+      // добавляем последнний ввод во временный массив
       arrayTemp[count - 1] = userString;
+
+      // приравниваем временный массив основному
       array = arrayTemp;
     }
   } while (userString != "");
@@ -32,17 +41,10 @@ string[] EnterString()
   return array;
 }
 
-EnterString();
-for (int i = 0; i < array.Length; i++)
-{
-  Console.WriteLine(i + " " + array[i]);
-}
-// Функция проверки массива по условию длины строк
+EnterString(); // заполняем массив
 
-string[] ChangeArray(string[] array, int stringLength)
-{
-  for (int i = 0; i < array.Length; i++)
-  {
-    
-  }
-}
+// создаем новый массив по условию
+string[] changeArray = array.Where(str => str.Length <= 3).ToArray();
+
+// выводим массив и массив, удовлетворяющий условию
+Console.WriteLine($"[{string.Join(", ", array)}] -> [{string.Join(", ", changeArray)}]");
